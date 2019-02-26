@@ -1,6 +1,10 @@
 const svg = d3.select('#svg');
+let drawing = false;
 
 function draw_point() {
+    if (!drawing)
+        return;
+
     const coords = d3.mouse(this);
 
     const c = svg.append('circle')
@@ -10,4 +14,11 @@ function draw_point() {
       .style('fill','black');
 }
 
+svg.on('mousedown', () => {
+    drawing = true;
+});
+
+svg.on('mouseup', () => {
+    drawing = false;
+});
 svg.on('mousemove', draw_point);
