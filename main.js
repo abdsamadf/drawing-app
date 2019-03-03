@@ -4,6 +4,7 @@ let activeLine;
 const colorElement = document.getElementById('color');
 const strokeElement = document.getElementById('stroke');
 const clear = document.getElementById('clear');
+const eraser = document.getElementById('eraser');
 const svg = d3.select('#svg');
 
 dfltColor = colorElement.options[colorElement.selectedIndex].value;
@@ -19,6 +20,22 @@ strokeElement.onchange = (event) => {
 
 clear.onclick = () => {
     svg.selectAll("*").remove();
+}
+
+eraser.onclick = () => {
+    color = 'white';
+}
+
+svg.on('click', click);
+
+function click() {
+    const coords = d3.mouse(this);
+
+    svg.append('circle')
+        .attr('cx', coords[0])
+        .attr('cy', coords[1])
+        .attr('r', stroke ? (stroke / 2) : (dfltStroke / 2))
+        .style('fill', color ? color : dfltColor)
 }
 
 const renderPath = d3.line()
