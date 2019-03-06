@@ -12,6 +12,7 @@ dfltStroke = strokeElement.options[strokeElement.selectedIndex].value;
 
 colorElement.onchange = (event) => {
     color = event.target.value;
+    cursor('pencil', 30, color);
 }
 
 strokeElement.onchange = (event) => {
@@ -24,6 +25,7 @@ clear.onclick = () => {
 
 eraser.onclick = () => {
     color = 'white';
+    cursor('eraser', 20);
 }
 
 svg.on('click', click);
@@ -49,6 +51,8 @@ svg.call(d3.drag()
     .on("drag", dragged)
     .on("end", dragended));
 
+cursor('pencil', 30);
+
 function dragstarted() {
     activeLine = svg.append("path").datum([]).attr("class", "line").style('stroke', color ? color : dfltColor).style('stroke-width', stroke ? stroke : dfltStroke);
     activeLine.datum().push(d3.mouse(this));
@@ -61,4 +65,12 @@ function dragged() {
 
 function dragended() {
     activeLine = null;
+}
+
+function cursor(icon, size, color = 'black') {
+    $('#svg').awesomeCursor(icon, {
+        color: color,
+        size: size,
+        hotspot: 'center'
+    })
 }
