@@ -1,6 +1,9 @@
 # Drawing-App
 Drawing App created using d3.js
 
+## Get Started
+Click on this [link](https://abdsamadf.github.io/drawing-app) to see the website **or** you can download or clone the project, and loading up the index.html file in your browser.
+
 ## FEATURES
 The drawing app supports:
 
